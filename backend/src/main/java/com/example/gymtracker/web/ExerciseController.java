@@ -19,8 +19,8 @@ public class ExerciseController {
   @GetMapping public List<ExerciseDTO> list(){ return service.list(); }
 
   @PostMapping
-  public ResponseEntity<ExerciseDTO> create(@Valid @RequestBody CreateExerciseDTO in){
-    UUID userId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+  public ResponseEntity<ExerciseDTO> create(@Valid @RequestBody CreateExerciseDTO in,
+                                           @RequestHeader("X-User-Id") UUID userId){
     return ResponseEntity.status(HttpStatus.CREATED).body(service.create(in, userId));
   }
 }

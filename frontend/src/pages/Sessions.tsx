@@ -5,17 +5,23 @@ export default function Sessions(){
   const [date, setDate] = useState("");
   const [exerciseId, setExerciseId] = useState("");
   const [sessionId, setSessionId] = useState<string|undefined>();
+  const [nextSetIndex, setNextSetIndex] = useState(1);
 
   const createSession = async ()=>{
     const res = await api.post('/sessions', { sessionDate: date });
     setSessionId(res.data.id);
+    setNextSetIndex(1);
   };
 
   const addSet = async ()=>{
     if(!sessionId) return;
     await api.post(`/sessions/${sessionId}/sets`, {
-      exerciseId, setIndex: 1, reps: 10, weightKg: 20.0
+      exerciseId,
+      setIndex: nextSetIndex,
+      reps: 10,
+      weightKg: 20.0
     });
+    setNextSetIndex(nextSetIndex + 1);
     alert('Set added');
   };
 
