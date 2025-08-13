@@ -1,10 +1,11 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { api } from "../lib/api";
 import { useState } from "react";
 
 type Exercise = { id: string; name: string; muscleGroup: string };
 
 export default function Exercises(){
+  const queryClient = useQueryClient();
   const { data } = useQuery({
     queryKey: ['exercises'],
     queryFn: async ()=> (await api.get<Exercise[]>('/exercises')).data
@@ -13,7 +14,11 @@ export default function Exercises(){
   const [group, setGroup] = useState("");
   const create = useMutation({
     mutationFn: async ()=> (await api.post('/exercises', { name, muscleGroup: group })).data,
-    onSuccess:()=>window.location.reload()
+    onSuccess:()=>{
+      queryClient.invalidateQueries({ queryKey: ['exercises'] });
+      setName("");
+      setGroup("");
+    }
   });
 
   return (
