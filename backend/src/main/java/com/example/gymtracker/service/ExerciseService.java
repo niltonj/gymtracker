@@ -18,11 +18,12 @@ public class ExerciseService {
   private final ExerciseMapper mapper;
 
   public ExerciseDTO create(CreateExerciseDTO in, UUID userId){
-    Exercise e = Exercise.builder()
-      .name(in.name())
-      .muscleGroup(in.muscleGroup())
-      .createdBy(userId)
-      .build();
+    Exercise e = new Exercise(
+      null,
+      in.name(),
+      in.muscleGroup(),
+      userId
+    );
     return mapper.toDTO(repo.save(e));
   }
 
