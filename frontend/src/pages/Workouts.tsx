@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type ExerciseEntry = {
   name: string;
@@ -6,11 +6,24 @@ type ExerciseEntry = {
   reps: string;
 };
 
+const STORAGE_KEY = "workout";
+
 export default function Workouts() {
   const [exercise, setExercise] = useState("");
   const [weight, setWeight] = useState("");
   const [reps, setReps] = useState("");
   const [list, setList] = useState<ExerciseEntry[]>([]);
+
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      try {
+        setList(JSON.parse(saved));
+      } catch {
+        // ignore malformed saved data
+      }
+    }
+  }, []);
 
   const addExercise = () => {
     if (!exercise || !weight || !reps) return;
@@ -21,7 +34,7 @@ export default function Workouts() {
   };
 
   const saveWorkout = () => {
-    console.log(list);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     alert("Workout saved");
   };
 
