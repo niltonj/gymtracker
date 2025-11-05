@@ -24,13 +24,13 @@ export default function Exercises(){
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">Exercises</h1>
-      <div className="flex gap-2">
-        <input className="border rounded px-3 py-2" placeholder="Name" value={name} onChange={e=>setName(e.target.value)} />
-        <input className="border rounded px-3 py-2" placeholder="Muscle group" value={group} onChange={e=>setGroup(e.target.value)} />
-        <button className="px-4 py-2 rounded bg-black text-white" onClick={()=>create.mutate()}>Add</button>
+      <div className="flex flex-col sm:flex-row gap-2">
+        <input className="border rounded px-3 py-2 flex-1" placeholder="Name" value={name} onChange={e=>setName(e.target.value)} />
+        <input className="border rounded px-3 py-2 flex-1 sm:flex-none sm:w-40" placeholder="Muscle group" value={group} onChange={e=>setGroup(e.target.value)} />
+        <button className="px-4 py-2 rounded bg-black text-white whitespace-nowrap" onClick={()=>create.mutate()}>Add</button>
       </div>
-      <ul className="list-disc pl-6">
-        {data?.map(e=> <li key={e.id}>{e.name} — <span className="text-sm text-gray-500">{e.muscleGroup}</span></li>)}
+      <ul className="list-disc pl-6 space-y-1">
+        {data?.map(e=> <li key={e.id} className="break-words">{e.name} — <span className="text-sm text-gray-500">{e.muscleGroup}</span></li>)}
       </ul>
     </div>
   );
