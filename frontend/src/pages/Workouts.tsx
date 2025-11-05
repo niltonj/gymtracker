@@ -41,7 +41,7 @@ export default function Workouts() {
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-semibold">New Workout</h1>
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <input
           className="border rounded px-3 py-2 flex-1"
           placeholder="Exercise"
@@ -49,21 +49,21 @@ export default function Workouts() {
           onChange={(e) => setExercise(e.target.value)}
         />
         <input
-          className="border rounded px-3 py-2 w-24"
+          className="border rounded px-3 py-2 sm:w-24 w-full"
           type="number"
           placeholder="Weight (kg)"
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />
         <input
-          className="border rounded px-3 py-2 w-24"
+          className="border rounded px-3 py-2 sm:w-24 w-full"
           type="number"
           placeholder="Reps"
           value={reps}
           onChange={(e) => setReps(e.target.value)}
         />
         <button
-          className="px-4 py-2 rounded bg-black text-white"
+          className="px-4 py-2 rounded bg-black text-white whitespace-nowrap"
           onClick={addExercise}
         >
           Add
