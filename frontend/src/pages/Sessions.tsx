@@ -36,7 +36,7 @@ export default function Sessions(){
         <input className="border rounded px-3 py-2 flex-1" placeholder="Exercise UUID" value={exerciseId} onChange={e=>setExerciseId(e.target.value)} />
         <button className="px-4 py-2 rounded bg-black text-white whitespace-nowrap" onClick={addSet} disabled={!sessionId}>Add Set</button>
       </div>
-      {sessionId && <p className="text-sm break-all">Current session: {sessionId}</p>}
+      {sessionId && <p className="text-sm break-words">Current session: {sessionId}</p>}
     </div>
   );
 }

@@ -17,6 +17,10 @@ export default function App() {
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
           onClick={closeSidebar}
+          role="button"
+          aria-label="Close menu"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Escape' && closeSidebar()}
         />
       )}
 
@@ -28,6 +32,7 @@ export default function App() {
           transform transition-transform duration-200 ease-in-out
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}
+        aria-hidden={!sidebarOpen && "true"}
       >
         <div className="flex items-center justify-between">
           <h1 className="text-xl font-semibold">GymTracker</h1>
@@ -63,6 +68,7 @@ export default function App() {
             onClick={() => setSidebarOpen(true)}
             className="p-2 rounded hover:bg-gray-100"
             aria-label="Open menu"
+            aria-expanded={sidebarOpen}
           >
             <Menu size={24} />
           </button>
